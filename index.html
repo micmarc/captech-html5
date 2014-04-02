@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<title>Title</title>
+
+</head>
+<body>
+<div id="html5challenge">
+<header>
+    <!-- Nav -->
+    <nav id="top-nav">
+        <ul id="menu">
+            <li>Sections</li>
+            <li>Search</li>
+            <li>User Icon</li>
+        </ul>
+    </nav>
+    <!-- Masthead -->
+    <div id="masthead">
+        <h1>CapTech.io News</h1>
+        <p>[date]</p>
+    </div>
+    <!-- Categories -->
+    <nav id="categories-nav">
+        
+    </nav>
+</header>
+<main role="main">
+    <!-- row 1, 5 cols -->
+    <section id="banner">
+        <!-- retrieve from http://html5news.herokuapp.com/banners -->
+        <p>[message]</p>
+    </section>
+    <!-- row 2, 1 col -->
+    <aside id="sidebar">
+        <!-- created in a loop -->
+        <article>
+            <h2>[headline]</h2>
+            <p>[snippet]</p>
+        </article>
+    </aside>
+    <!-- row 2, 2 cols -->
+    <section id="main">
+        <!-- created in a loop -->
+        <article>
+            <h2>[headline]</h2>
+            <p>[snippet]</p>
+        </article>
+    </section>
+    <!-- row 2, 1 col -->
+    <secton id="opinion">
+        <!-- created in a loop -->
+        <article>
+            <h2>[headline]</h2>
+            <p>[snippet]</p>
+        </article>
+    </secton>
+    <section id="travel">
+        <!-- created in a loop -->
+        <article>
+            <h2>[headline]</h2>
+            <p>[snippet]</p>
+        </article>
+    </section>
+</main>
+<footer></footer>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/backbone/backbone.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Templates -->
+<script type="text/template" id="category-template">
+    <a href="#"><%= displayName %></a>
+</script>
+
+</body>
+</html>
