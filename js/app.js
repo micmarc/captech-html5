@@ -44,8 +44,12 @@ $(function(){
             // this.header = this.$('header');
             this.categoryList = new CategoryCollection();
             this.categoryListView = new CategoryListView({model:this.categoryList});
-            this.categoryList.fetch();
-            this.render();
+            var self = this;
+            this.categoryList.fetch({
+                success: function() {
+                    self.render();
+                }
+            });
         },
         render: function() {
             $('#categories-nav').html(this.categoryListView.render().el);
