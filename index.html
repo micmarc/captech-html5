@@ -30,8 +30,11 @@
 <main role="main">
     <!-- row 1, 5 cols -->
     <section id="banner">
+        <div id="expand">Click to expand</div>
         <!-- retrieve from http://html5news.herokuapp.com/banners -->
-        <p>[message]</p>
+        <div id="banner-content">
+            
+        </div>
     </section>
     <!-- row 2, 1 col -->
     <aside id="sidebar">
@@ -76,6 +79,10 @@
 <!-- Templates -->
 <script type="text/template" id="category-template">
     <a href="#"><%= displayName %></a>
+</script>
+
+<script type="text/template" id="banner-template">
+    <%= message %>
 </script>
 
 </body>
