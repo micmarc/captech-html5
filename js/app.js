@@ -60,6 +60,57 @@ $(function(){
             return this;
         }
     });
+
+    // Articles
+    var Article = Backbone.Model.extend();
+    var ArticleCollection = Backbone.Collection.extend({
+        model: Article
+    });
+
+    // Featured Articles
+    var Featured = Backbone.Model.extend({
+        url: "http://html5news.herokuapp.com/articles/featured"
+    });
+    var FeaturedView = Backbone.View.extend({
+        //tagName: "",
+        initialize: function() {
+            this.model.bind("reset", this.render, this);
+        },
+        render: function() {
+            _.each(this.model.keys(), function (key) {
+                var tagName = (key == "aside") ? "aside" : "section";
+                console.log("tag = " + tagName);
+                var articles = new ArticleCollection(this.model.get(key));
+                $(this.el).append(new FeaturedCollectionView({
+                    model: articles, 
+                    tagName: tagName
+                }).render().el); 
+            }, this);
+            return this;
+        }
+    });
+    var FeaturedCollectionView = Backbone.View.extend({
+        initialize: function() {
+            this.model.bind("reset", this.render, this);
+        },
+        render: function() {
+            _.each(this.model.models, function (model) {
+                $(this.el).append(new FeaturedItemView({model:model}).render().el);
+            }, this);
+            return this;
+        }
+    });
+    var FeaturedItemView = Backbone.View.extend({
+        tagName: "article",
+        template: _.template($('#article-featured-template').html()),
+        initialize: function() {
+            this.listenTo(this.model, "change", this.render);
+        },
+        render: function (eventName) {
+            $(this.el).html(this.template(this.model.toJSON()));
+            return this;
+        }
+    });
     
     // Main view
     var AppView = Backbone.View.extend({
@@ -84,6 +135,14 @@ $(function(){
                 success: function(model) {
                     var bannerView = new BannerView({model:model});
                     $('#banner-content').html(bannerView.render().el);
+                }
+            });
+
+            this.featured = new Featured();
+            this.featured.fetch({
+                success: function(model) {
+                    var featuredView = new FeaturedView({model:model});
+                    $('#page-content').html(featuredView.render().el);
                 }
             });
         }
